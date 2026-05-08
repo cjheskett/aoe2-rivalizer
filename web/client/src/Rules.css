@@ -1,0 +1,21 @@
+.rules-container {
+  max-width: 700px;
+  margin: 3rem auto;
+  padding: 0 1rem;
+  font-family: sans-serif;
+}
+
+.rules-container h2 {
+  text-align: center;
+  color: #fff;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 2rem;
+}
+
+.rules-placeholder {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+}

@@ -1,0 +1,64 @@
+.picker-container {
+  max-width: 700px;
+  margin: 3rem auto;
+  padding: 0 1rem;
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.picker-container h2 {
+  margin-bottom: 2rem;
+  color: #fff;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.civ-cards {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 2.5rem;
+}
+
+.civ-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  background: #1e1e2e;
+  border: 2px solid #444;
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+  min-width: 140px;
+}
+
+.civ-card-img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+
+.civ-card-name {
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.reroll-btn {
+  padding: 0.65rem 2.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  background: #f0c040;
+  color: #111;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.reroll-btn:hover {
+  background: #f5d060;
+}
