@@ -7,7 +7,27 @@ const app = express();
 app.use(cors());
 app.use('/static', express.static(path.join(__dirname, 'static')));
 
+console.log(`[startup] NODE_ENV=${process.env.NODE_ENV ?? '(unset)'}`);
+console.log(`[startup] DATABASE_URL=${process.env.DATABASE_URL ? 'set' : 'NOT SET'}`);
+
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+
+pool.query('SELECT 1')
+  .then(() => console.log('[startup] DB connection OK'))
+  .catch(err => console.error('[startup] DB connection FAILED:', err.message));
+
+app.use((req, _res, next) => {
+  req._startedAt = Date.now();
+  next();
+});
+
+app.use((req, res, next) => {
+  res.on('finish', () => {
+    const ms = Date.now() - req._startedAt;
+    console.log(`[req] ${req.method} ${req.path} ${res.statusCode} ${ms}ms`);
+  });
+  next();
+});
 
 const CIV_NAMES = {
   1: 'Britons', 2: 'Franks', 3: 'Goths', 4: 'Teutons', 5: 'Japanese',
@@ -118,9 +138,13 @@ app.get('/api/stats', async (_req, res) => {
   res.json(result);
 });
 
+process.on('unhandledRejection', (reason) => {
+  console.error('[unhandledRejection]', reason);
+});
+
 const CLIENT_DIST = path.join(__dirname, 'client', 'dist');
 app.use(express.static(CLIENT_DIST));
 app.get('/{*splat}', (_req, res) => res.sendFile(path.join(CLIENT_DIST, 'index.html')));
 
 const PORT = process.env.PORT ?? 3001;
-app.listen(PORT, () => console.log(`API running at http://localhost:${PORT}`));
+app.listen(PORT, '0.0.0.0', () => console.log(`[startup] listening on 0.0.0.0:${PORT}`));
