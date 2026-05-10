@@ -112,6 +112,7 @@ td {
 .mono {
   font-family: monospace;
   color: #aaa;
+  white-space: nowrap;
 }
 
 tr.kam-win:hover,
