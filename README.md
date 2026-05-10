@@ -23,6 +23,39 @@ DATABASE_URL="postgresql://..." python main.py
 
 ---
 
+## Server
+
+The backend is a Node.js/Express server (`web/server.js`) that:
+
+- Connects to the Railway PostgreSQL database via the `DATABASE_URL` environment variable
+- Exposes three REST API endpoints:
+  - `GET /api/matches` — full match history, ordered by date
+  - `GET /api/maps` — per-map win/loss breakdown
+  - `GET /api/stats` — per-player stats broken down by civilization and map
+- Serves static civ and map images from `web/static/`
+- Serves the built React client for all other routes
+
+---
+
+## Client
+
+The frontend is a React app (`web/client/`) built with Vite. It has five tabs:
+
+- **Match History** — a full table of every recorded match
+- **Stats** — per-player win rates broken down by civilization and map
+- **Maps** — map cards showing games played and win records
+- **Civ Picker** — randomly picks three civilizations for each player to choose from
+- **Rules** — house rules reference
+
+In production the client is built with `vite build` and served as static files by the Express server. For local development, run the Vite dev server separately:
+
+```bash
+cd web/client
+npm run dev
+```
+
+---
+
 ## Deployment
 
 The app is hosted on [Railway](https://railway.app). Deployments are automatic — just push to `main`.
