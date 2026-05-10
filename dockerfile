@@ -14,5 +14,5 @@ RUN npm ci
 COPY web/ ./
 COPY --from=client-builder /build/dist ./client/dist
 
-EXPOSE 3001
+EXPOSE 8080
 CMD ["node", "server.js"]
