@@ -29,7 +29,7 @@ export default function CivPicker() {
         {civs.map(civ => (
           <div key={civ} className="civ-card">
             <img
-              src={`http://localhost:3001/static/${civ}_AoE2.webp`}
+              src={`/static/${civ}_AoE2.webp`}
               alt={civ}
               className="civ-card-img"
               onError={e => { e.currentTarget.style.display = 'none'; }}

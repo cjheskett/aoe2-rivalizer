@@ -1,12 +1,17 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import CivPicker from './CivPicker.jsx';
+import MapPicker from './MapPicker.jsx';
 import Rules from './Rules.jsx';
+import Stats from './Stats.jsx';
+import Maps from './Maps.jsx';
 
 const TABS = [
   { id: 'history', label: 'Match History' },
-  { id: 'picker', label: 'Civ Picker' },
-  { id: 'rules', label: 'Rules' },
+  { id: 'stats',   label: 'Stats' },
+  { id: 'maps',    label: 'Maps' },
+  { id: 'picker',  label: 'Civ Picker' },
+  { id: 'rules',   label: 'Rules' },
 ];
 
 function Nav({ tab, setTab }) {
@@ -32,11 +37,19 @@ function formatDuration(seconds) {
   return `${m}:${String(s).padStart(2, '0')}`;
 }
 
+function formatDateTime(ts) {
+  if (!ts) return '—';
+  const d = new Date(ts);
+  const date = d.toLocaleDateString('en-US');
+  const time = d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+  return `${date} ${time}`;
+}
+
 function CivCell({ name }) {
   return (
     <span className="civ-cell">
       <img
-        src={`http://localhost:3001/static/${name}_AoE2.webp`}
+        src={`/static/${name}_AoE2.webp`}
         alt={name}
         className="civ-icon"
         onError={e => { e.currentTarget.style.display = 'none'; }}
@@ -53,17 +66,36 @@ export default function App() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:3001/api/matches')
+    fetch('/api/matches')
       .then(r => r.json())
       .then(data => { setMatches(data); setLoading(false); })
       .catch(e => { setError(e.message); setLoading(false); });
   }, []);
+
+  if (tab === 'maps') {
+    return (
+      <>
+        <Nav tab={tab} setTab={setTab} />
+        <Maps />
+      </>
+    );
+  }
 
   if (tab === 'picker') {
     return (
       <>
         <Nav tab={tab} setTab={setTab} />
         <CivPicker />
+        <MapPicker />
+      </>
+    );
+  }
+
+  if (tab === 'stats') {
+    return (
+      <>
+        <Nav tab={tab} setTab={setTab} />
+        <Stats />
       </>
     );
   }
@@ -106,8 +138,8 @@ export default function App() {
             <tr>
               <th>#</th>
               <th>Date</th>
-              <th>Time</th>
               <th>Duration</th>
+              <th>Map</th>
               <th>Kamarill</th>
               <th>Schnozberries</th>
               <th>Winner</th>
@@ -117,10 +149,10 @@ export default function App() {
             {matches.map((m, i) => (
               <tr key={m.id} className={m.winner === 'Kamarill' ? 'kam-win' : 'schnoz-win'}>
                 <td className="num">{matches.length - i}</td>
-                <td>{m.date}</td>
-                <td className="mono">{m.time ?? '—'}</td>
+                <td className="mono">{formatDateTime(m.played_at)}</td>
                 <td className="mono">{formatDuration(m.duration)}</td>
-                <td><CivCell name={m.kam_civ} /></td>
+                <td>{m.map ?? '—'}</td>
+              <td><CivCell name={m.kam_civ} /></td>
                 <td><CivCell name={m.schnoz_civ} /></td>
                 <td className="winner-cell">{m.winner}</td>
               </tr>

@@ -1,0 +1,7 @@
+web/node_modules
+web/client/node_modules
+web/client/dist
+*.db
+.git
+__pycache__
+*.pyc
