@@ -1,6 +1,6 @@
 # AoE2 Match Tracker
 
-A web app for tracking Age of Empires 2 match history between two players. The backend is an Express API backed by a PostgreSQL database on Railway; the frontend is a React/Vite app served by the same Express server.
+A web app for tracking the Age of Empires 2 rivalry between Kamarill and Schnozberries. It is purpose-built for this one matchup and not designed to be generalized. The backend is an Express API backed by a PostgreSQL database on Railway; the frontend is a React/Vite app served by the same Express server.
 
 ---
 
