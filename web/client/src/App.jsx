@@ -115,6 +115,16 @@ export default function App() {
   const kamWins = matches.filter(m => m.winner === 'Kamarill').length;
   const schnozWins = matches.filter(m => m.winner === 'Schnozberries').length;
 
+  let streakPlayer = null;
+  let streakCount = 0;
+  if (matches.length > 0) {
+    streakPlayer = matches[0].winner;
+    for (const m of matches) {
+      if (m.winner !== streakPlayer) break;
+      streakCount++;
+    }
+  }
+
   return (
     <>
       <Nav tab={tab} setTab={setTab} />
@@ -132,6 +142,12 @@ export default function App() {
             <span className="win-count">{schnozWins}</span>
           </div>
         </div>
+
+        {streakCount >= 2 && (
+          <p className={`streak-banner ${streakPlayer === 'Kamarill' ? 'streak-kam' : 'streak-schnoz'}`}>
+            {streakPlayer} is on a {streakCount}-game win streak
+          </p>
+        )}
 
         <table>
           <thead>
