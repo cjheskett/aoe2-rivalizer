@@ -5,13 +5,15 @@ import MapPicker from './MapPicker.jsx';
 import Rules from './Rules.jsx';
 import Stats from './Stats.jsx';
 import Maps from './Maps.jsx';
+import FunStats from './FunStats.jsx';
 
 const TABS = [
-  { id: 'history', label: 'Match History' },
-  { id: 'stats',   label: 'Stats' },
-  { id: 'maps',    label: 'Maps' },
-  { id: 'picker',  label: 'Civ Picker' },
-  { id: 'rules',   label: 'Rules' },
+  { id: 'history',   label: 'Match History' },
+  { id: 'stats',     label: 'Stats' },
+  { id: 'maps',      label: 'Maps' },
+  { id: 'funstats',  label: 'Fun Stats' },
+  { id: 'picker',    label: 'Civ Picker' },
+  { id: 'rules',     label: 'Rules' },
 ];
 
 function Nav({ tab, setTab }) {
@@ -91,6 +93,15 @@ export default function App() {
     );
   }
 
+  if (tab === 'funstats') {
+    return (
+      <>
+        <Nav tab={tab} setTab={setTab} />
+        <FunStats />
+      </>
+    );
+  }
+
   if (tab === 'stats') {
     return (
       <>
@@ -125,21 +136,31 @@ export default function App() {
     }
   }
 
+  const total = matches.length;
+  const seriesLabel = kamWins === schnozWins
+    ? 'The rivalry is dead even'
+    : `${kamWins > schnozWins ? 'Kamarill' : 'Schnozberries'} leads the all-time series`;
+
   return (
     <>
       <Nav tab={tab} setTab={setTab} />
       <div className="container">
-        <h1>AoE2 Match History</h1>
 
-        <div className="scoreboard">
-          <div className={`score-card ${kamWins >= schnozWins ? 'leading' : ''}`}>
-            <span className="player-name">Kamarill</span>
-            <span className="win-count">{kamWins}</span>
+        <div className="rival-card">
+          <div className="rival-player rival-kam">
+            <span className="rival-name">Kamarill</span>
+            <span className="rival-wins">{kamWins}</span>
+            <span className="rival-pct">{total ? (kamWins / total * 100).toFixed(0) : 0}%</span>
           </div>
-          <div className="score-divider">vs</div>
-          <div className={`score-card ${schnozWins > kamWins ? 'leading' : ''}`}>
-            <span className="player-name">Schnozberries</span>
-            <span className="win-count">{schnozWins}</span>
+          <div className="rival-center">
+            <span className="rival-series-label">{seriesLabel}</span>
+            <span className="rival-vs">VS</span>
+            <span className="rival-total">{total} games played</span>
+          </div>
+          <div className="rival-player rival-schnoz">
+            <span className="rival-name">Schnozberries</span>
+            <span className="rival-wins">{schnozWins}</span>
+            <span className="rival-pct">{total ? (schnozWins / total * 100).toFixed(0) : 0}%</span>
           </div>
         </div>
 
