@@ -1,0 +1,51 @@
+.arc-chart-wrap {
+  background: #1e1e2e;
+  border: 2px solid #444;
+  border-radius: 12px;
+  padding: 1rem 1.2rem 0.4rem;
+  margin-bottom: 1.5rem;
+}
+
+.arc-chart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.4rem;
+}
+
+.arc-chart-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #888;
+}
+
+.arc-mode-toggle {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.arc-mode-btn {
+  padding: 0.2rem 0.65rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  background: transparent;
+  color: #555;
+  border: 1px solid #333;
+  border-radius: 4px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.arc-mode-btn:hover {
+  color: #aaa;
+  border-color: #666;
+}
+
+.arc-mode-btn.active {
+  color: #f0c040;
+  border-color: #f0c040;
+}

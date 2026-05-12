@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './App.css';
 import CivPicker from './CivPicker.jsx';
 import MapPicker from './MapPicker.jsx';
@@ -6,6 +6,7 @@ import Rules from './Rules.jsx';
 import Stats from './Stats.jsx';
 import Maps from './Maps.jsx';
 import FunStats from './FunStats.jsx';
+import ArcChart from './ArcChart.jsx';
 
 const TABS = [
   { id: 'history',   label: 'Match History' },
@@ -67,6 +68,15 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [tooltip, setTooltip] = useState(null);
+  const [highlightedId, setHighlightedId] = useState(null);
+  const highlightTimer = useRef(null);
+
+  function handleGameClick(id) {
+    setHighlightedId(id);
+    clearTimeout(highlightTimer.current);
+    highlightTimer.current = setTimeout(() => setHighlightedId(null), 2500);
+    document.getElementById(`match-row-${id}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
 
   useEffect(() => {
     fetch('/api/matches')
@@ -171,6 +181,8 @@ export default function App() {
           </p>
         )}
 
+        <ArcChart matches={matches} onGameClick={handleGameClick} />
+
         <table>
           <thead>
             <tr>
@@ -187,7 +199,8 @@ export default function App() {
             {matches.map((m, i) => (
               <tr
                 key={m.id}
-                className={m.winner === 'Kamarill' ? 'kam-win' : 'schnoz-win'}
+                id={`match-row-${m.id}`}
+                className={`${m.winner === 'Kamarill' ? 'kam-win' : 'schnoz-win'}${highlightedId === m.id ? ' row-highlighted' : ''}`}
                 onMouseEnter={e => {
                   const rect = e.currentTarget.getBoundingClientRect();
                   setTooltip({ match: m, x: rect.right + 8, y: rect.top });
