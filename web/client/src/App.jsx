@@ -66,6 +66,7 @@ export default function App() {
   const [matches, setMatches] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [tooltip, setTooltip] = useState(null);
 
   useEffect(() => {
     fetch('/api/matches')
@@ -184,12 +185,20 @@ export default function App() {
           </thead>
           <tbody>
             {matches.map((m, i) => (
-              <tr key={m.id} className={m.winner === 'Kamarill' ? 'kam-win' : 'schnoz-win'}>
+              <tr
+                key={m.id}
+                className={m.winner === 'Kamarill' ? 'kam-win' : 'schnoz-win'}
+                onMouseEnter={e => {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  setTooltip({ match: m, x: rect.right + 8, y: rect.top });
+                }}
+                onMouseLeave={() => setTooltip(null)}
+              >
                 <td className="num">{matches.length - i}</td>
                 <td className="mono">{formatDateTime(m.played_at)}</td>
                 <td className="mono">{formatDuration(m.duration)}</td>
                 <td>{m.map ?? '—'}</td>
-              <td><CivCell name={m.kam_civ} /></td>
+                <td><CivCell name={m.kam_civ} /></td>
                 <td><CivCell name={m.schnoz_civ} /></td>
                 <td className="winner-cell">{m.winner}</td>
               </tr>
@@ -197,6 +206,37 @@ export default function App() {
           </tbody>
         </table>
       </div>
+
+      {tooltip && (() => {
+        const m = tooltip.match;
+        const TOOLTIP_H = 140;
+        const y = Math.min(tooltip.y, window.innerHeight - TOOLTIP_H - 8);
+        const ages = [
+          { label: 'Feudal',   kam: m.kam_feudal_time,   schnoz: m.schnoz_feudal_time },
+          { label: 'Castle',   kam: m.kam_castle_time,   schnoz: m.schnoz_castle_time },
+          { label: 'Imperial', kam: m.kam_imperial_time, schnoz: m.schnoz_imperial_time },
+        ];
+        return (
+          <div className="match-tooltip" style={{ left: tooltip.x, top: y }}>
+            <div className="match-tooltip-header">
+              <span className="tt-player tt-kam">Kamarill</span>
+              <span className="tt-divider">Age-Up Times</span>
+              <span className="tt-player tt-schnoz">Schnozberries</span>
+            </div>
+            {ages.map(({ label, kam, schnoz }) => (
+              <div key={label} className="tt-row">
+                <span className={`tt-time tt-kam ${kam != null && (schnoz == null || kam < schnoz) ? 'tt-faster' : ''}`}>
+                  {formatDuration(kam)}
+                </span>
+                <span className="tt-label">{label}</span>
+                <span className={`tt-time tt-schnoz ${schnoz != null && (kam == null || schnoz < kam) ? 'tt-faster' : ''}`}>
+                  {formatDuration(schnoz)}
+                </span>
+              </div>
+            ))}
+          </div>
+        );
+      })()}
     </>
   );
 }
