@@ -39,12 +39,13 @@ The backend is a Node.js/Express server (`web/server.js`) that:
 
 ## Client
 
-The frontend is a React app (`web/client/`) built with Vite. It has five tabs:
+The frontend is a React app (`web/client/`) built with Vite. It has six tabs:
 
 - **Match History** — a full table of every recorded match
 - **Stats** — per-player win rates broken down by civilization and map
 - **Maps** — map cards showing games played and win records
-- **Civ Picker** — randomly picks three civilizations for each player to choose from
+- **Fun Stats** — additional match statistics and fun facts
+- **Civ Picker** — randomly picks three civilizations for each player to choose from, plus a map picker
 - **Rules** — house rules reference
 
 In production the client is built with `vite build` and served as static files by the Express server. For local development, run the Vite dev server separately:

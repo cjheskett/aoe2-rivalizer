@@ -59,6 +59,12 @@ app.get('/api/matches', async (_req, res) => {
     schnoz_civ: civName(r.schnoz_civ_id),
     winner: r.winner === 1 ? 'Kamarill' : 'Schnozberries',
     map: r.map ?? null,
+    kam_feudal_time:    r.kam_feudal_time    ?? null,
+    kam_castle_time:    r.kam_castle_time    ?? null,
+    kam_imperial_time:  r.kam_imperial_time  ?? null,
+    schnoz_feudal_time:   r.schnoz_feudal_time   ?? null,
+    schnoz_castle_time:   r.schnoz_castle_time   ?? null,
+    schnoz_imperial_time: r.schnoz_imperial_time ?? null,
   }));
 
   res.json(matches);
@@ -85,9 +91,14 @@ app.get('/api/maps', async (_req, res) => {
 app.get('/api/stats', async (_req, res) => {
   const { rows } = await pool.query('SELECT * FROM match');
 
+  function avgOf(vals) {
+    const filtered = vals.filter(v => v != null);
+    return filtered.length ? Math.round(filtered.reduce((a, b) => a + b, 0) / filtered.length) : null;
+  }
+
   const players = {
-    Kamarill:      { wins: 0, losses: 0, civs: {}, maps: {} },
-    Schnozberries: { wins: 0, losses: 0, civs: {}, maps: {} },
+    Kamarill:      { wins: 0, losses: 0, civs: {}, maps: {}, feudalTimes: [], castleTimes: [], imperialTimes: [] },
+    Schnozberries: { wins: 0, losses: 0, civs: {}, maps: {}, feudalTimes: [], castleTimes: [], imperialTimes: [] },
   };
 
   function tally(player, civId, map, won) {
@@ -108,6 +119,12 @@ app.get('/api/stats', async (_req, res) => {
     const kamWon = r.winner === 1;
     tally(players.Kamarill,      r.kam_civ_id,   r.map, kamWon);
     tally(players.Schnozberries, r.schnoz_civ_id, r.map, !kamWon);
+    players.Kamarill.feudalTimes.push(r.kam_feudal_time);
+    players.Kamarill.castleTimes.push(r.kam_castle_time);
+    players.Kamarill.imperialTimes.push(r.kam_imperial_time);
+    players.Schnozberries.feudalTimes.push(r.schnoz_feudal_time);
+    players.Schnozberries.castleTimes.push(r.schnoz_castle_time);
+    players.Schnozberries.imperialTimes.push(r.schnoz_imperial_time);
   }
 
   function toRows(bucket) {
@@ -130,6 +147,11 @@ app.get('/api/stats', async (_req, res) => {
       losses: p.losses,
       total,
       winRate: total ? +(p.wins / total * 100).toFixed(1) : 0,
+      ageTimes: {
+        feudal:   avgOf(p.feudalTimes),
+        castle:   avgOf(p.castleTimes),
+        imperial: avgOf(p.imperialTimes),
+      },
       civs: toRows(p.civs),
       maps: toRows(p.maps),
     };
