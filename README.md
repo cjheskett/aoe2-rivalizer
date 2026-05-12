@@ -58,8 +58,11 @@ npm run dev
 
 ## Deployment
 
-The app is hosted on [Railway](https://railway.app). Deployments are automatic — just push to `main`.
+The app is hosted on [Railway](https://railway.app). Deployments trigger automatically when changes land on `main`.
 
-```bash
-git push origin main
-```
+`main` is a protected branch — direct pushes are not allowed. The workflow is:
+
+1. Work on the `test` branch (or a feature branch)
+2. Push to `test` — this triggers the Docker publish workflow so changes can be validated
+3. Open a pull request from `test` → `main`
+4. Merge the PR to deploy to production
