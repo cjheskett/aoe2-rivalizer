@@ -57,6 +57,69 @@
   margin-top: 0.1rem;
 }
 
+.age-times-section {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #333;
+}
+
+.age-times-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.age-row {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1rem;
+  background: #1e1e2e;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 0.75rem 1.25rem;
+}
+
+.age-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #666;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.age-time {
+  font-size: 1.3rem;
+  font-weight: 700;
+  font-family: monospace;
+  color: #555;
+}
+
+.age-time.age-kam    { text-align: right; color: #60a0f0; }
+.age-time.age-schnoz { text-align: left;  color: #f07060; }
+.age-time.age-faster { color: #f0c040; }
+
+.age-times-players {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 0 1.25rem;
+  margin-top: 0.25rem;
+}
+
+.age-player-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #555;
+}
+
+.age-player-label.age-kam    { text-align: right; color: #60a0f060; }
+.age-player-label.age-schnoz { text-align: left;  color: #f0706060; }
+
 .never-picked-section {
   margin-top: 2rem;
   padding-top: 1.5rem;

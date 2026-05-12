@@ -43,6 +43,40 @@
 .record-sep    { color: #666; }
 .record-rate   { color: #aaa; font-size: 0.85rem; margin-left: 0.5rem; }
 
+.age-up-row {
+  display: flex;
+  border-top: 1px solid #2a2a3e;
+  border-bottom: 1px solid #2a2a3e;
+}
+
+.age-up-cell {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.6rem 1rem;
+  gap: 0.15rem;
+}
+
+.age-up-cell + .age-up-cell {
+  border-left: 1px solid #2a2a3e;
+}
+
+.age-up-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #555;
+}
+
+.age-up-value {
+  font-size: 1.1rem;
+  font-weight: 700;
+  font-family: monospace;
+  color: #aaa;
+}
+
 .stats-section-label {
   padding: 0.6rem 1rem 0.2rem;
   font-size: 0.72rem;

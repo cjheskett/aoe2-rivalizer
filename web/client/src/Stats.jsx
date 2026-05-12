@@ -1,6 +1,13 @@
 import { useEffect, useState } from 'react';
 import './Stats.css';
 
+function formatDuration(seconds) {
+  if (seconds == null) return '—';
+  const m = Math.floor(seconds / 60);
+  const s = Math.floor(seconds % 60);
+  return `${m}:${String(s).padStart(2, '0')}`;
+}
+
 function CivImg({ name }) {
   return (
     <img
@@ -45,6 +52,7 @@ function StatsTable({ rows, firstCol }) {
 }
 
 function PlayerStats({ name, data }) {
+  const { feudal, castle, imperial } = data.ageTimes ?? {};
   return (
     <div className="player-stats">
       <div className="player-stats-header">
@@ -54,6 +62,21 @@ function PlayerStats({ name, data }) {
           <span className="record-sep"> / </span>
           <span className="record-losses">{data.losses}L</span>
           <span className="record-rate">{data.winRate}%</span>
+        </div>
+      </div>
+
+      <div className="age-up-row">
+        <div className="age-up-cell">
+          <span className="age-up-label">Avg Feudal</span>
+          <span className="age-up-value">{formatDuration(feudal)}</span>
+        </div>
+        <div className="age-up-cell">
+          <span className="age-up-label">Avg Castle</span>
+          <span className="age-up-value">{formatDuration(castle)}</span>
+        </div>
+        <div className="age-up-cell">
+          <span className="age-up-label">Avg Imperial</span>
+          <span className="age-up-value">{formatDuration(imperial)}</span>
         </div>
       </div>
 

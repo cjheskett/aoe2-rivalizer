@@ -2,6 +2,7 @@ replay_dir = r"C:\Users\dkama\Games\Age of Empires 2 DE\76561197984930820\savega
 
 import os
 from mgz.summary import Summary
+from mgz.model import parse_match
 import psycopg2 as pg2
 from datetime import datetime, timedelta
 
@@ -55,14 +56,45 @@ if __name__ == "__main__":
                 print("\tThis replay is too short to be a valid match.")
                 short_games += 1
                 continue
-            else:
-                kam = players[0] if players[0]['name'] == "Kamarill" else players[1]
-                schnoz = players[0] if players[0]['name'] == "Schnozberries" else players[1]
-                new_matches.append((kam['civilization'], schnoz['civilization'], 1 if kam['winner'] else 2, played_at, duration.total_seconds(), map_name))
+
+            kam = players[0] if players[0]['name'] == "Kamarill" else players[1]
+            schnoz = players[0] if players[0]['name'] == "Schnozberries" else players[1]
+
+            # Parse age-up times
+            age_times = {
+                'Kamarill':      {'feudal': None, 'castle': None, 'imperial': None},
+                'Schnozberries': {'feudal': None, 'castle': None, 'imperial': None},
+            }
+            fh.seek(0)
+            match = parse_match(fh)
+            for u in match.uptimes:
+                name = u.player.name
+                if name not in age_times:
+                    continue
+                age_str = str(u.age).lower()
+                secs = round(u.timestamp.total_seconds()) if hasattr(u.timestamp, 'total_seconds') else round(u.timestamp / 1000)
+                if 'feudal' in age_str:
+                    age_times[name]['feudal'] = secs
+                elif 'castle' in age_str:
+                    age_times[name]['castle'] = secs
+                elif 'imperial' in age_str:
+                    age_times[name]['imperial'] = secs
+
+            kt = age_times['Kamarill']
+            st = age_times['Schnozberries']
+            new_matches.append((
+                kam['civilization'], schnoz['civilization'],
+                1 if kam['winner'] else 2,
+                played_at, duration.total_seconds(), map_name,
+                kt['feudal'], kt['castle'], kt['imperial'],
+                st['feudal'], st['castle'], st['imperial'],
+            ))
 
     if new_matches:
-        c.executemany('''INSERT INTO match (kam_civ_id, schnoz_civ_id, winner, played_at, duration, map)
-                         VALUES (%s, %s, %s, %s, %s, %s)''', new_matches)
+        c.executemany('''INSERT INTO match (kam_civ_id, schnoz_civ_id, winner, played_at, duration, map,
+                                           kam_feudal_time, kam_castle_time, kam_imperial_time,
+                                           schnoz_feudal_time, schnoz_castle_time, schnoz_imperial_time)
+                         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)''', new_matches)
         conn.commit()
         print(f"Inserted {len(new_matches)} new match(es).")
     

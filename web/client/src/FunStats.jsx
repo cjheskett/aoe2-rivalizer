@@ -87,6 +87,16 @@ function computeStats(matches, stats) {
   const favoriteDay = dayCounts.indexOf(Math.max(...dayCounts));
   const favoriteDayCount = dayCounts[favoriteDay];
 
+  // Average age-up times
+  function avgTime(field) {
+    const vals = matches.map(m => m[field]).filter(v => v != null);
+    return vals.length ? Math.round(vals.reduce((a, b) => a + b, 0) / vals.length) : null;
+  }
+  const ageTimes = {
+    Kamarill:      { feudal: avgTime('kam_feudal_time'),   castle: avgTime('kam_castle_time'),   imperial: avgTime('kam_imperial_time') },
+    Schnozberries: { feudal: avgTime('schnoz_feudal_time'), castle: avgTime('schnoz_castle_time'), imperial: avgTime('schnoz_imperial_time') },
+  };
+
   // Never-picked civs
   const pickedCivs = new Set([...matches.map(m => m.kam_civ), ...matches.map(m => m.schnoz_civ)]);
   const neverPicked = [...ALL_CIVS].filter(c => !pickedCivs.has(c));
@@ -99,6 +109,7 @@ function computeStats(matches, stats) {
     kamClutch, schnozClutch,
     improvedPlayer, improvedDelta, kamDelta, schnozDelta,
     favoriteDay, favoriteDayCount,
+    ageTimes,
     neverPicked,
   };
 }
@@ -216,6 +227,31 @@ export default function FunStats() {
           sub={`Kamarill · Schnozberries unique civs`}
         />
 
+      </div>
+
+      <div className="age-times-section">
+        <h3 className="never-picked-title">Average Age-Up Times</h3>
+        <div className="age-times-grid">
+          {[
+            { label: 'Feudal Age',   kam: s.ageTimes.Kamarill.feudal,   schnoz: s.ageTimes.Schnozberries.feudal },
+            { label: 'Castle Age',   kam: s.ageTimes.Kamarill.castle,   schnoz: s.ageTimes.Schnozberries.castle },
+            { label: 'Imperial Age', kam: s.ageTimes.Kamarill.imperial, schnoz: s.ageTimes.Schnozberries.imperial },
+          ].map(({ label, kam, schnoz }) => (
+            <div key={label} className="age-row">
+              <span className={`age-time age-kam ${kam != null && schnoz != null && kam < schnoz ? 'age-faster' : ''}`}>
+                {kam != null ? formatDuration(kam) : '—'}
+              </span>
+              <span className="age-label">{label}</span>
+              <span className={`age-time age-schnoz ${schnoz != null && kam != null && schnoz < kam ? 'age-faster' : ''}`}>
+                {schnoz != null ? formatDuration(schnoz) : '—'}
+              </span>
+            </div>
+          ))}
+        </div>
+        <div className="age-times-players">
+          <span className="age-player-label age-kam">Kamarill</span>
+          <span className="age-player-label age-schnoz">Schnozberries</span>
+        </div>
       </div>
 
       <div className="never-picked-section">
