@@ -295,6 +295,11 @@ tr.schnoz-win .winner-cell {
 .tt-time.tt-schnoz { text-align: right; color: #c06050; }
 .tt-time.tt-faster { color: #f0c040; }
 
+tr.row-highlighted {
+  background: #252520 !important;
+  box-shadow: inset 0 0 0 1px #f0c040;
+}
+
 .status {
   text-align: center;
   margin-top: 4rem;
