@@ -42,7 +42,7 @@ The backend is a Node.js/Express server (`web/server.js`) that:
 
 The frontend is a React app (`web/client/`) built with Vite. It has six tabs:
 
-- **Match History** — full table of every recorded match. The scoreboard shows the all-time series record and win percentages. A streak banner appears when either player is on a winning run of 2 or more games. Hovering a row shows a tooltip with that match's age-up times for both players.
+- **Match History** — full table of every recorded match. The scoreboard shows the all-time series record and win percentages. A streak banner appears when either player is on a winning run of 2 or more games. A **Rivalry Arc** chart above the table visualizes the shape of the rivalry over time — toggle between cumulative wins and running win rate; hover any data point for a score snapshot, click it to scroll to and highlight that match in the table. Hovering a row shows a tooltip with that match's age-up times for both players.
 - **Stats** — per-player win rates broken down by civilization and map, plus average Feudal, Castle, and Imperial age-up times per player.
 - **Maps** — map cards showing games played and win records per map.
 - **Fun Stats** — rivalry highlights including longest/shortest game, all-time best streak, favorite map, go-to civs, clutch civs, average game length, civ diversity, most improved form, favorite day to play, average age-up times comparison, and a full list of never-picked civilizations.
