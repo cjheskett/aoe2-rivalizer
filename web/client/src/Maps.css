@@ -11,9 +11,9 @@
 }
 
 .map-card {
-  background: #1e1e2e;
-  border: 2px solid #444;
-  border-radius: 10px;
+  background: var(--stone-card);
+  border: 1px solid var(--stone-border);
+  border-radius: 4px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -34,14 +34,16 @@
 }
 
 .map-name {
-  font-weight: 700;
-  color: #fff;
-  font-size: 0.95rem;
+  font-family: var(--heading);
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  color: var(--stone-text-h);
 }
 
 .map-played {
   font-size: 0.78rem;
-  color: #888;
+  color: var(--stone-text-dim);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -53,8 +55,8 @@
   margin-top: 0.1rem;
 }
 
-.map-kam   { font-size: 0.82rem; color: #60a0f0; }
-.map-schnoz { font-size: 0.82rem; color: #f07060; }
+.map-kam   { font-size: 0.82rem; color: var(--stone-kam); }
+.map-schnoz { font-size: 0.82rem; color: var(--stone-schnoz); }
 
 .map-picker .civ-card-img {
   width: 180px;
@@ -70,22 +72,22 @@
 }
 
 .map-card:hover {
-  border-color: #666;
+  border-color: var(--stone-border-hi);
 }
 
 .map-card-selected {
-  border-color: #f0c040 !important;
+  border-color: var(--stone-gold) !important;
 }
 
 .map-card-chevron {
   text-align: center;
   font-size: 0.6rem;
-  color: #555;
+  color: var(--stone-text-dim);
   padding: 0.3rem 0 0.4rem;
 }
 
 .map-card-selected .map-card-chevron {
-  color: #f0c040;
+  color: var(--stone-gold);
 }
 
 /* Detail panel — full-width grid item below the card's row */
@@ -103,34 +105,37 @@
 /* Detail panel content */
 
 .map-detail-panel {
-  background: #1e1e2e;
-  border: 2px solid #f0c040;
-  border-radius: 12px;
+  background: var(--stone-card);
+  border: 1px solid var(--stone-gold);
+  border-radius: 4px;
   padding: 1.25rem 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
+  box-shadow: 0 0 20px var(--stone-gold-glow);
 }
 
 .detail-map-title {
-  font-size: 1rem;
+  font-family: var(--heading);
+  font-size: 0.8rem;
   font-weight: 700;
-  color: #fff;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.1em;
+  color: var(--stone-text-h);
 }
 
 .detail-section-label {
-  font-size: 0.68rem;
-  font-weight: 700;
+  font-family: var(--heading);
+  font-size: 0.58rem;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #666;
+  letter-spacing: 0.12em;
+  color: var(--stone-text-dim);
   display: block;
   margin-bottom: 0.5rem;
 }
 
-.detail-section-kam   { color: #4a80c0; }
-.detail-section-schnoz { color: #c06050; }
+.detail-section-kam   { color: var(--stone-kam); }
+.detail-section-schnoz { color: var(--stone-schnoz); }
 
 /* Stats row: duration + age-up times */
 
@@ -150,14 +155,14 @@
 .detail-duration-val {
   font-size: 1.6rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--stone-text-h);
   font-family: monospace;
   line-height: 1.1;
 }
 
 .detail-duration-vs {
   font-size: 0.72rem;
-  color: #555;
+  color: var(--stone-text-dim);
   margin-top: 0.2rem;
   font-family: monospace;
 }
@@ -179,8 +184,8 @@
   padding-top: 1.4rem;
 }
 
-.detail-age-player-kam   { font-size: 0.7rem; font-weight: 700; color: #60a0f0; }
-.detail-age-player-schnoz { font-size: 0.7rem; font-weight: 700; color: #f07060; }
+.detail-age-player-kam   { font-size: 0.7rem; font-weight: 700; color: var(--stone-kam); }
+.detail-age-player-schnoz { font-size: 0.7rem; font-weight: 700; color: var(--stone-schnoz); }
 
 .detail-age-col {
   display: flex;
@@ -188,7 +193,7 @@
   align-items: center;
   gap: 0.2rem;
   flex: 1;
-  border-left: 1px solid #2a2a3e;
+  border-left: 1px solid var(--stone-border);
   padding: 0 0.75rem;
 }
 
@@ -197,10 +202,11 @@
 }
 
 .detail-age-label {
-  font-size: 0.65rem;
-  color: #555;
+  font-family: var(--heading);
+  font-size: 0.55rem;
+  color: var(--stone-text-dim);
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.1em;
   margin-bottom: 0.15rem;
 }
 
@@ -211,9 +217,9 @@
   font-weight: 600;
 }
 
-.detail-age-kam    { color: #4a80c0; }
-.detail-age-schnoz { color: #c06050; }
-.detail-faster     { color: #f0c040 !important; }
+.detail-age-kam    { color: var(--stone-kam); }
+.detail-age-schnoz { color: var(--stone-schnoz); }
+.detail-faster     { color: var(--stone-gold) !important; }
 
 /* Civ breakdown */
 
@@ -244,7 +250,7 @@
 
 .detail-civ-name {
   font-size: 0.85rem;
-  color: #ccc;
+  color: var(--stone-text);
   flex: 1;
 }
 
@@ -254,8 +260,8 @@
   font-family: monospace;
 }
 
-.detail-civ-kam    { color: #60a0f0; }
-.detail-civ-schnoz { color: #f07060; }
+.detail-civ-kam    { color: var(--stone-kam); }
+.detail-civ-schnoz { color: var(--stone-schnoz); }
 
 /* Recent games */
 
@@ -271,8 +277,8 @@
   align-items: center;
   gap: 0.75rem;
   padding: 0.3rem 0.5rem;
-  border-radius: 5px;
-  background: #16162a;
+  border-radius: 3px;
+  background: var(--stone-row-alt);
   font-size: 0.82rem;
 }
 
@@ -281,21 +287,21 @@
   font-size: 0.75rem;
 }
 
-.detail-recent-kam    .detail-recent-winner { color: #60a0f0; }
-.detail-recent-schnoz .detail-recent-winner { color: #f07060; }
+.detail-recent-kam    .detail-recent-winner { color: var(--stone-kam); }
+.detail-recent-schnoz .detail-recent-winner { color: var(--stone-schnoz); }
 
 .detail-recent-civs {
-  color: #aaa;
+  color: var(--stone-text);
 }
 
 .detail-recent-dur {
   font-family: monospace;
-  color: #666;
+  color: var(--stone-text-dim);
   white-space: nowrap;
 }
 
 .detail-recent-date {
   font-size: 0.72rem;
-  color: #555;
+  color: var(--stone-text-dim);
   white-space: nowrap;
 }

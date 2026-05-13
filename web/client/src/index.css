@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cinzel+Decorative:wght@700&display=swap');
+
 :root {
   --text: #6b6375;
   --text-h: #08060d;
@@ -12,7 +14,7 @@
     rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
 
   --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --heading: 'Cinzel', Georgia, serif;
   --mono: ui-monospace, Consolas, monospace;
 
   font: 18px/145% var(--sans);
@@ -33,16 +35,31 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
+    --text-h: #e8e2d0;
+    --bg: #0d0d0f;
+    --border: #2a2830;
+    --code-bg: #131318;
+    --accent: #c9a84c;
+    --accent-bg: rgba(201, 168, 76, 0.15);
+    --accent-border: rgba(201, 168, 76, 0.5);
     --social-bg: rgba(47, 48, 58, 0.5);
     --shadow:
       rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+
+    /* Stone Keep game palette */
+    --stone-bg:        #0d0d0f;
+    --stone-card:      #131318;
+    --stone-row-alt:   #101015;
+    --stone-border:    #2a2830;
+    --stone-border-hi: #3d3850;
+    --stone-gold:      #c9a84c;
+    --stone-gold-dim:  #7a6430;
+    --stone-gold-glow: rgba(201, 168, 76, 0.15);
+    --stone-text:      #9891a8;
+    --stone-text-h:    #e8e2d0;
+    --stone-text-dim:  #5a5468;
+    --stone-kam:       #4a90d9;
+    --stone-schnoz:    #d94a3a;
   }
 
   #social .button-icon {
