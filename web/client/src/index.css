@@ -35,31 +35,31 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --text: #9ca3af;
-    --text-h: #e8e2d0;
-    --bg: #0d0d0f;
-    --border: #2a2830;
-    --code-bg: #131318;
-    --accent: #c9a84c;
-    --accent-bg: rgba(201, 168, 76, 0.15);
-    --accent-border: rgba(201, 168, 76, 0.5);
+    --text-h: #f0ead8;
+    --bg: #111116;
+    --border: #34313f;
+    --code-bg: #1c1c24;
+    --accent: #d4b050;
+    --accent-bg: rgba(212, 176, 80, 0.15);
+    --accent-border: rgba(212, 176, 80, 0.5);
     --social-bg: rgba(47, 48, 58, 0.5);
     --shadow:
       rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
 
     /* Stone Keep game palette */
-    --stone-bg:        #0d0d0f;
-    --stone-card:      #131318;
-    --stone-row-alt:   #101015;
-    --stone-border:    #2a2830;
-    --stone-border-hi: #3d3850;
-    --stone-gold:      #c9a84c;
-    --stone-gold-dim:  #7a6430;
-    --stone-gold-glow: rgba(201, 168, 76, 0.15);
-    --stone-text:      #9891a8;
-    --stone-text-h:    #e8e2d0;
-    --stone-text-dim:  #5a5468;
-    --stone-kam:       #4a90d9;
-    --stone-schnoz:    #d94a3a;
+    --stone-bg:        #111116;
+    --stone-card:      #1c1c24;
+    --stone-row-alt:   #161620;
+    --stone-border:    #34313f;
+    --stone-border-hi: #4a4660;
+    --stone-gold:      #d4b050;
+    --stone-gold-dim:  #8a7030;
+    --stone-gold-glow: rgba(212, 176, 80, 0.2);
+    --stone-text:      #a89ebc;
+    --stone-text-h:    #f0ead8;
+    --stone-text-dim:  #706880;
+    --stone-kam:       #5aa0e8;
+    --stone-schnoz:    #e85545;
   }
 
   #social .button-icon {
