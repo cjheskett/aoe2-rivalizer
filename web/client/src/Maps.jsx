@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import './Maps.css';
 
 function mapImageUrl(name) {
@@ -153,35 +153,38 @@ export default function Maps() {
   return (
     <div className="maps-container">
       <div className="map-grid">
-        {maps.map(m => (
-          <div
-            key={m.name}
-            className={`map-card${selectedMap === m.name ? ' map-card-selected' : ''}`}
-            onClick={() => setSelectedMap(prev => prev === m.name ? null : m.name)}
-          >
-            <img
-              src={mapImageUrl(m.name)}
-              alt={m.name}
-              className="map-img"
-              onError={e => { e.currentTarget.style.display = 'none'; }}
-            />
-            <div className="map-info">
-              <span className="map-name">{m.name}</span>
-              <span className="map-played">{m.played} {m.played === 1 ? 'game' : 'games'}</span>
-              <div className="map-record">
-                <span className="map-kam">{m.kamWins}W Kamarill</span>
-                <span className="map-schnoz">{m.schnozWins}W Schnozberries</span>
+        {maps.map(m => {
+          const isSelected = selectedMap === m.name;
+          return (
+            <Fragment key={m.name}>
+              <div
+                className={`map-card${isSelected ? ' map-card-selected' : ''}`}
+                onClick={() => setSelectedMap(prev => prev === m.name ? null : m.name)}
+              >
+                <img
+                  src={mapImageUrl(m.name)}
+                  alt={m.name}
+                  className="map-img"
+                  onError={e => { e.currentTarget.style.display = 'none'; }}
+                />
+                <div className="map-info">
+                  <span className="map-name">{m.name}</span>
+                  <span className="map-played">{m.played} {m.played === 1 ? 'game' : 'games'}</span>
+                  <div className="map-record">
+                    <span className="map-kam">{m.kamWins}W Kamarill</span>
+                    <span className="map-schnoz">{m.schnozWins}W Schnozberries</span>
+                  </div>
+                </div>
+                <div className="map-card-chevron">{isSelected ? '▲' : '▼'}</div>
               </div>
-            </div>
-            <div className="map-card-chevron">{selectedMap === m.name ? '▲' : '▼'}</div>
-          </div>
-        ))}
-      </div>
-
-      <div className={`map-detail-wrap${selectedMap ? ' open' : ''}`}>
-        <div className="map-detail-inner">
-          {detail && <MapDetail mapName={selectedMap} detail={detail} overallAvgDuration={overallAvgDuration} />}
-        </div>
+              {isSelected && detail && (
+                <div className="map-detail-full">
+                  <MapDetail mapName={selectedMap} detail={detail} overallAvgDuration={overallAvgDuration} />
+                </div>
+              )}
+            </Fragment>
+          );
+        })}
       </div>
     </div>
   );

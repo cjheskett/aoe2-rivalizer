@@ -88,21 +88,16 @@
   color: #f0c040;
 }
 
-/* Detail panel slide-open */
+/* Detail panel — full-width grid item below the card's row */
 
-.map-detail-wrap {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.25s ease;
-  margin-top: 1.25rem;
+.map-detail-full {
+  grid-column: 1 / -1;
+  animation: detailIn 0.2s ease;
 }
 
-.map-detail-wrap.open {
-  grid-template-rows: 1fr;
-}
-
-.map-detail-inner {
-  overflow: hidden;
+@keyframes detailIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 /* Detail panel content */
