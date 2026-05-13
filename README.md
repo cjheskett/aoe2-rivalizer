@@ -44,9 +44,9 @@ The frontend is a React app (`web/client/`) built with Vite. It has six tabs:
 
 - **Match History** — full table of every recorded match. The scoreboard shows the all-time series record and win percentages. A streak banner appears when either player is on a winning run of 2 or more games. A **Rivalry Arc** chart above the table visualizes the shape of the rivalry over time — toggle between cumulative wins and running win rate; hover any data point for a score snapshot, click it to scroll to and highlight that match in the table. Hovering a row shows a tooltip with that match's age-up times for both players.
 - **Stats** — per-player win rates broken down by civilization and map, plus average Feudal, Castle, and Imperial age-up times per player.
-- **Maps** — map cards showing games played and win records per map.
+- **Maps** — map cards showing games played and win records per map. Clicking a card expands an inline detail panel directly below it showing average game duration (vs. the overall average), per-player age-up time averages, each player's civ record on that map, and the last 5 games played there.
 - **Fun Stats** — rivalry highlights including longest/shortest game, all-time best streak, favorite map, go-to civs, clutch civs, average game length, civ diversity, most improved form, favorite day to play, average age-up times comparison, and a full list of never-picked civilizations.
-- **Civ Picker** — randomly picks three civilizations for each player to choose from, plus a map picker.
+- **Civ Picker** — randomly picks three civilizations for each player to choose from, plus a map picker. One of the three is always a never-played civ, highlighted with a gold "Never Picked" badge.
 - **Rules** — house rules reference.
 
 In production the client is built with `vite build` and served as static files by the Express server. For local development, run the Vite dev server separately:

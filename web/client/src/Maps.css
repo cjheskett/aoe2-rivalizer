@@ -61,3 +61,241 @@
   height: 180px;
   object-fit: cover;
 }
+
+/* Map card interactive state */
+
+.map-card {
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+.map-card:hover {
+  border-color: #666;
+}
+
+.map-card-selected {
+  border-color: #f0c040 !important;
+}
+
+.map-card-chevron {
+  text-align: center;
+  font-size: 0.6rem;
+  color: #555;
+  padding: 0.3rem 0 0.4rem;
+}
+
+.map-card-selected .map-card-chevron {
+  color: #f0c040;
+}
+
+/* Detail panel — full-width grid item below the card's row */
+
+.map-detail-full {
+  grid-column: 1 / -1;
+  animation: detailIn 0.2s ease;
+}
+
+@keyframes detailIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Detail panel content */
+
+.map-detail-panel {
+  background: #1e1e2e;
+  border: 2px solid #f0c040;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.detail-map-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.04em;
+}
+
+.detail-section-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #666;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.detail-section-kam   { color: #4a80c0; }
+.detail-section-schnoz { color: #c06050; }
+
+/* Stats row: duration + age-up times */
+
+.detail-stats-row {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.detail-duration-col {
+  display: flex;
+  flex-direction: column;
+  min-width: 100px;
+}
+
+.detail-duration-val {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #fff;
+  font-family: monospace;
+  line-height: 1.1;
+}
+
+.detail-duration-vs {
+  font-size: 0.72rem;
+  color: #555;
+  margin-top: 0.2rem;
+  font-family: monospace;
+}
+
+.detail-age-grid {
+  display: flex;
+  gap: 0;
+  flex: 1;
+  min-width: 260px;
+}
+
+.detail-age-player-labels {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.25rem;
+  padding-bottom: 0.1rem;
+  margin-right: 0.5rem;
+  padding-top: 1.4rem;
+}
+
+.detail-age-player-kam   { font-size: 0.7rem; font-weight: 700; color: #60a0f0; }
+.detail-age-player-schnoz { font-size: 0.7rem; font-weight: 700; color: #f07060; }
+
+.detail-age-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  flex: 1;
+  border-left: 1px solid #2a2a3e;
+  padding: 0 0.75rem;
+}
+
+.detail-age-col:first-of-type {
+  border-left: none;
+}
+
+.detail-age-label {
+  font-size: 0.65rem;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.15rem;
+}
+
+.detail-age-kam,
+.detail-age-schnoz {
+  font-family: monospace;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.detail-age-kam    { color: #4a80c0; }
+.detail-age-schnoz { color: #c06050; }
+.detail-faster     { color: #f0c040 !important; }
+
+/* Civ breakdown */
+
+.detail-civs-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.detail-civs-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.detail-civ-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.detail-civ-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.detail-civ-name {
+  font-size: 0.85rem;
+  color: #ccc;
+  flex: 1;
+}
+
+.detail-civ-record {
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: monospace;
+}
+
+.detail-civ-kam    { color: #60a0f0; }
+.detail-civ-schnoz { color: #f07060; }
+
+/* Recent games */
+
+.detail-recent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.detail-recent-row {
+  display: grid;
+  grid-template-columns: 130px 1fr auto auto;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.3rem 0.5rem;
+  border-radius: 5px;
+  background: #16162a;
+  font-size: 0.82rem;
+}
+
+.detail-recent-winner {
+  font-weight: 700;
+  font-size: 0.75rem;
+}
+
+.detail-recent-kam    .detail-recent-winner { color: #60a0f0; }
+.detail-recent-schnoz .detail-recent-winner { color: #f07060; }
+
+.detail-recent-civs {
+  color: #aaa;
+}
+
+.detail-recent-dur {
+  font-family: monospace;
+  color: #666;
+  white-space: nowrap;
+}
+
+.detail-recent-date {
+  font-size: 0.72rem;
+  color: #555;
+  white-space: nowrap;
+}
