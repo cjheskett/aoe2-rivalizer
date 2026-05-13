@@ -6,11 +6,13 @@
 
 .fun-title {
   text-align: center;
-  font-size: 1.4rem;
-  font-weight: 800;
+  font-family: var(--heading);
+  font-size: 0.85rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #f0c040;
+  letter-spacing: 0.2em;
+  color: var(--stone-gold);
+  text-shadow: 0 0 20px var(--stone-gold-glow);
   margin-bottom: 1.5rem;
 }
 
@@ -21,46 +23,47 @@
 }
 
 .fun-card {
-  background: #1e1e2e;
-  border: 2px solid #333;
-  border-radius: 10px;
+  background: var(--stone-card);
+  border: 1px solid var(--stone-border);
+  border-radius: 4px;
   padding: 1.25rem 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
 }
 
-.fun-card.card-kam  { border-color: #60a0f0; }
-.fun-card.card-schnoz { border-color: #f07060; }
+.fun-card.card-kam  { border-color: var(--stone-kam); }
+.fun-card.card-schnoz { border-color: var(--stone-schnoz); }
 
 .fun-card-label {
-  font-size: 0.7rem;
-  font-weight: 700;
+  font-family: var(--heading);
+  font-size: 0.58rem;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #888;
+  letter-spacing: 0.12em;
+  color: var(--stone-text-dim);
 }
 
 .fun-card-value {
   font-size: 1.6rem;
   font-weight: 800;
-  color: #fff;
+  color: var(--stone-text-h);
   line-height: 1.1;
 }
 
-.fun-card.card-kam  .fun-card-value { color: #60a0f0; }
-.fun-card.card-schnoz .fun-card-value { color: #f07060; }
+.fun-card.card-kam  .fun-card-value { color: var(--stone-kam); }
+.fun-card.card-schnoz .fun-card-value { color: var(--stone-schnoz); }
 
 .fun-card-sub {
   font-size: 0.8rem;
-  color: #888;
+  color: var(--stone-text-dim);
   margin-top: 0.1rem;
 }
 
 .age-times-section {
   margin-top: 2rem;
   padding-top: 1.5rem;
-  border-top: 1px solid #333;
+  border-top: 1px solid var(--stone-border);
 }
 
 .age-times-grid {
@@ -75,18 +78,19 @@
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   gap: 1rem;
-  background: #1e1e2e;
-  border: 1px solid #333;
-  border-radius: 8px;
+  background: var(--stone-card);
+  border: 1px solid var(--stone-border);
+  border-radius: 3px;
   padding: 0.75rem 1.25rem;
 }
 
 .age-label {
-  font-size: 0.75rem;
-  font-weight: 700;
+  font-family: var(--heading);
+  font-size: 0.6rem;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.07em;
-  color: #666;
+  letter-spacing: 0.1em;
+  color: var(--stone-text-dim);
   text-align: center;
   white-space: nowrap;
 }
@@ -95,12 +99,12 @@
   font-size: 1.3rem;
   font-weight: 700;
   font-family: monospace;
-  color: #555;
+  color: var(--stone-text-dim);
 }
 
-.age-time.age-kam    { text-align: right; color: #60a0f0; }
-.age-time.age-schnoz { text-align: left;  color: #f07060; }
-.age-time.age-faster { color: #f0c040; }
+.age-time.age-kam    { text-align: right; color: var(--stone-kam); }
+.age-time.age-schnoz { text-align: left;  color: var(--stone-schnoz); }
+.age-time.age-faster { color: var(--stone-gold); }
 
 .age-times-players {
   display: grid;
@@ -110,28 +114,30 @@
 }
 
 .age-player-label {
-  font-size: 0.7rem;
-  font-weight: 700;
+  font-family: var(--heading);
+  font-size: 0.58rem;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: #555;
+  letter-spacing: 0.08em;
+  color: var(--stone-text-dim);
 }
 
-.age-player-label.age-kam    { text-align: right; color: #60a0f060; }
-.age-player-label.age-schnoz { text-align: left;  color: #f0706060; }
+.age-player-label.age-kam    { text-align: right; color: color-mix(in srgb, var(--stone-kam) 50%, transparent); }
+.age-player-label.age-schnoz { text-align: left;  color: color-mix(in srgb, var(--stone-schnoz) 50%, transparent); }
 
 .never-picked-section {
   margin-top: 2rem;
   padding-top: 1.5rem;
-  border-top: 1px solid #333;
+  border-top: 1px solid var(--stone-border);
 }
 
 .never-picked-title {
-  font-size: 0.75rem;
-  font-weight: 700;
+  font-family: var(--heading);
+  font-size: 0.6rem;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #888;
+  letter-spacing: 0.12em;
+  color: var(--stone-text-dim);
   margin-bottom: 1rem;
   display: flex;
   align-items: center;
@@ -139,8 +145,8 @@
 }
 
 .never-picked-count {
-  background: #2a2a3e;
-  color: #aaa;
+  background: var(--stone-border);
+  color: var(--stone-text);
   font-size: 0.7rem;
   padding: 0.15rem 0.5rem;
   border-radius: 999px;
@@ -157,12 +163,12 @@
   display: flex;
   align-items: center;
   gap: 0.35rem;
-  background: #1e1e2e;
-  border: 1px solid #333;
-  border-radius: 6px;
+  background: var(--stone-card);
+  border: 1px solid var(--stone-border);
+  border-radius: 3px;
   padding: 0.3rem 0.6rem;
   font-size: 0.8rem;
-  color: #aaa;
+  color: var(--stone-text);
 }
 
 .never-picked-icon {
